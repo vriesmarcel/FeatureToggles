@@ -1,0 +1,11 @@
+from marcelv/pluralsightcourse2
+RUN mkdir c:\MvcMusicstore
+WORKDIR /MvcMusicStore
+ADD fixAcls.ps1 /MvcMusicStore/fixAcls.ps1
+ADD MvcMusicstore.zip  /MvcMusicStore/MvcMusicStore.zip
+ADD MvcMusicStore.deploy.cmd /MvcMusicStore/MvcMusicStore.deploy.cmd
+ADD MvcMusicStore.SetParameters.xml /MvcMusicStore/MvcMusicStore.SetParameters.xml
+RUN MvcMusicStore.deploy.cmd, /Y
+RUN powershell.exe -executionpolicy bypass .\fixAcls.ps1
+RUN MvcMusicStore.deploy.cmd, /Y
+
