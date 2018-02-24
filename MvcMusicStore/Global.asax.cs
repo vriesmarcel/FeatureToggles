@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration.EnvironmentVariables;
+﻿using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.Extensions.Configuration.EnvironmentVariables;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -44,7 +46,7 @@ namespace MvcMusicStore
      
             System.Data.Entity.Database.SetInitializer(new MvcMusicStore.Models.SampleData());
          
-
+            TelemetryConfiguration.Active.InstrumentationKey = System.Configuration.ConfigurationManager.AppSettings["ApplicationInsightsKey"];
             AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);

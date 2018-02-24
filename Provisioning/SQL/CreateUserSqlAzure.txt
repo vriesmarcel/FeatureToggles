@@ -1,0 +1,17 @@
+use master
+CREATE LOGIN [MusicStoreLogin] WITH password='QE7m575RkQrjNvPj'
+GO
+
+CREATE USER [MusicStoreUser] FOR LOGIN [MusicStoreLogin] WITH DEFAULT_SCHEMA=[dbo] 
+GO
+
+use musicstore2
+#Next connect/switch to the database you want the new user for. Create a user in that database
+
+CREATE USER [MusicStoreUser]  FOR LOGIN [MusicStoreLogin] WITH DEFAULT_SCHEMA=[dbo]
+GO
+
+EXEC sp_addrolemember 'db_owner', 'MusicStoreUser'
+
+GRANT ALTER ON SCHEMA :: dbo TO MusicStoreUser;
+GO

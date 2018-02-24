@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: mvcmusicstore-staging-deployment
+spec:
+    replicas: 1  
+    minReadySeconds: 10
+    strategy:
+        type: RollingUpdate
+        rollingUpdate:
+            maxUnavailable: 1
+            maxSurge: 1 
+    template:
+        metadata:
+            labels:
+                app: mvcmusicstore
+                environment: staging
+        spec:
+            nodeSelector:
+              beta.kubernetes.io/os: windows
+            containers:
+            - name: mvcmusicstore
+              image: xprtidtelacr.azurecr.io/telemetry/mvcmusicstore:#{BUILD_BUILDID}#
+              ports:
+              - containerPort: 80
+              imagePullPolicy: Always
+              env:
+              - name: ApplicationInsightsKey
+                value: "5aa743d2-1fca-4e55-bd96-f7aa3a522d66"
+              

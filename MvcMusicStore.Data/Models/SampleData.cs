@@ -12,9 +12,9 @@ namespace MvcMusicStore.Models
 
             new List<MVCFeatureToggle>
             {
-                new MVCFeatureToggle { Id = new MVCFeatureToggle().Id, Enabled = false, Name="HomePagefeatureToggle"},
-                new MVCFeatureToggle { Id = new MVCFeatureToggle().Id, Enabled = false, Name="HomePagefeatureToggleUI" },
-                new MVCFeatureToggle { Id = new MVCFeatureToggle().Id, Enabled = false, Name ="ServiceAFeaturetoggle" },
+                new MVCFeatureToggle { Id = new System.Guid("A5144D6F-3E07-47D9-A3B9-6B630EF1A4B5"), Enabled = false, Name="HomePagefeatureToggle"},
+                new MVCFeatureToggle { Id = new System.Guid("9821753F-524C-4588-8F0C-6E263995AF6A"), Enabled = false, Name="HomePagefeatureToggleUI" },
+                new MVCFeatureToggle { Id = new System.Guid("67639DAE-13FE-4983-80F9-DD74796CB1B7"), Enabled = false, Name ="ServiceAFeaturetoggle" },
             }.ForEach(t => context.FeatureToggles.Add(t));
 
             var genres = new List<Genre>
