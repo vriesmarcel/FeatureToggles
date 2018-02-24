@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-@using MvcMusicStore.FeaturetoggleSwitches;
+
 <html>
 <head>
     <title>@ViewBag.Title</title>
@@ -13,11 +13,7 @@
     <div id="header">
         <div>
             <h1><a href="/">Welcome to the ASP.NET MVC MUSIC STORE!</a></h1>
-            @if (new HomePagefeatureToggleUI().FeatureEnabled)
-            {
-                <h1><a href="/">You are comming from location:@ViewBag.CustomerCountry</a></h1>
-            }
-        </div>
+               </div>
         <ul id="navlist">
             <li class="first"><a href="@Url.Content("~")" id="current">Home</a></li>
             <li><a href="@Url.Content("~/Store/")">Store</a></li>
@@ -31,15 +27,8 @@
     <div id="main">
         @RenderBody()
     </div>
-    @{ 
-        var hpftUI = new HomePagefeatureToggleUI();
-        var hpft = new HomePagefeatureToggle();
-        var svc = new ServiceAFeaturetoggle();
-    }
+ 
     <div id="footer"> 
-        <span>HomePagefeatureToggleUI =<b>@hpftUI.FeatureEnabled</b></span>|
-        <span>HomePagefeatureToggle = <b>@hpft.FeatureEnabled</b></span>|
-        <span>ServiceAFeaturetoggle =<b> @svc.FeatureEnabled</b></span>|
         <span>built with <a href="http://asp.net/mvc">ASP.NET MVC 3</a></span>
     </div>
 </body>

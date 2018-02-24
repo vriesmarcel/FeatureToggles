@@ -2,13 +2,6 @@
 using System.Linq;
 using System.Web.Mvc;
 using MvcMusicStore.Models;
-using System.Threading.Tasks;
-using System.Net.Http;
-using Newtonsoft.Json;
-using System;
-using Microsoft.ApplicationInsights;
-using MvcMusicStore.FeaturetoggleSwitches;
-using FeatureToggle;
 
 namespace MvcMusicStore.Controllers
 {
@@ -19,33 +12,23 @@ namespace MvcMusicStore.Controllers
         // comment feature 1
 
         MusicStoreEntities storeDB = null;
-        IFeatureToggle homePagefeatureToggle = null;
-        IFeatureToggle serviceABToggle = null;
+
 
         public HomeController()
         {
              storeDB = new MusicStoreEntities();
-            homePagefeatureToggle = new HomePagefeatureToggle();
-            serviceABToggle = new ServiceAFeaturetoggle();
         }
 
-        public HomeController(MusicStoreEntities storeEntities, IFeatureToggle featureToggle, IFeatureToggle serviceToggle)
+        public HomeController(MusicStoreEntities storeEntities)
         {
              storeDB = storeEntities;
-            homePagefeatureToggle = featureToggle;
-            serviceABToggle = serviceToggle;
         }
 
         public ActionResult Index()
         {
             // Get most popular albums
             var albums = GetTopSellingAlbums(5);
-            if (homePagefeatureToggle.FeatureEnabled)
-            {
-                var customerCountry = GetCountryFromClient(Request?.UserHostAddress);
-                ViewBag.CustomerCountry = customerCountry;
-            }
-
+          
             return View(albums);
         }
 
@@ -61,57 +44,7 @@ namespace MvcMusicStore.Controllers
                 .Take(count)
                 .ToList();
         }
-        private string GetCountryFromClient(string ip)
-        {
-            string result = null;
-            if(serviceABToggle.FeatureEnabled)
-            {
-                result = GetCountryViaRemoteService(ip);
-            }
-            else
-            {
-                result = GetCountryFromLocalLookup(ip);
-            }
-
-            return result;
-        }
-
-        private string GetCountryFromLocalLookup(string ip)
-        {
-            var result = "Amsterdam";
-            DoSomeSmartCalculation(ip);
-            return result;
-        }
-
-        private void DoSomeSmartCalculation(string ip)
-        {
-            // do a bussy wait to simulate some heavy serverside stuff
-            // to come up with a number.
-            for (int x = 0; x < 1000000000; x++) ;
-
-        }
-
-        private string GetCountryViaRemoteService(string ip)
-        {
-            var result = "unknown location";
-            try
-            {
-                var serviceUrl = "http://ipinfo.io/" + ip;
-                HttpClient request = new HttpClient();
-                var taskresult = request.GetStringAsync((new Uri(serviceUrl)));
-                taskresult.Wait();
-
-                var location = JsonConvert.DeserializeObject<Location>(taskresult.Result);
-                if(location.city!=null)
-                    result = location.city.ToString();
-            }
-            catch (Exception e)
-            {
-                TelemetryClient client = new TelemetryClient();
-                client.TrackException(e);
-            }
-            return result;
-        }
+       
     }
 
     public class Location
