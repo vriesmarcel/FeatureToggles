@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 
 namespace MvcMusicStore.Models
 {
-    [Bind(Exclude = "OrderId")]
+   // [Bind(Exclude = "OrderId")]
     public partial class Order
     {
         [ScaffoldColumn(false)]

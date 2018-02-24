@@ -46,8 +46,7 @@ namespace MvcMusicStore
      
             System.Data.Entity.Database.SetInitializer(new MvcMusicStore.Models.SampleData());
          
-            TelemetryConfiguration.Active.InstrumentationKey = System.Configuration.ConfigurationManager.AppSettings["ApplicationInsightsKey"];
-            AreaRegistration.RegisterAllAreas();
+             AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
