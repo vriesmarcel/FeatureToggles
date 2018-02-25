@@ -390,6 +390,10 @@
     <Content Include="Content\Site.css" />
     <Content Include="packages.config" />
     <Content Include="nuget.config" />
+    <None Include="Dockerfile" />
+    <None Include=".dockerignore">
+      <DependentUpon>Dockerfile</DependentUpon>
+    </None>
     <None Include="Properties\PublishProfiles\Devintersection.pubxml" />
     <None Include="Properties\PublishProfiles\DevintersectionDemo.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
