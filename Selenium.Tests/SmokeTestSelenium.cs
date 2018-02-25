@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium;
+using System;
 
 namespace UITests
 {
@@ -10,9 +11,15 @@ namespace UITests
     [TestClass]
     public class SmokeTestSelenium
     {
-        const string _homePageUrl = "http://localhost:26641/";
-        public SmokeTestSelenium()
+        string _homePageUrl = "http://localhost:26641/";
+        [TestInitialize ]
+        public void SmokeTestSeleniumInitialize()
         {
+            var envVar = Environment.GetEnvironmentVariable("MVCHomePageUrl");
+            if(!string.IsNullOrEmpty(envVar))
+            {
+                _homePageUrl = envVar;
+            }
         }
 
         [TestMethod]

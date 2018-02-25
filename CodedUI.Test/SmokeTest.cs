@@ -18,9 +18,15 @@ namespace UITests
     [CodedUITest]
     public class SmokeTest
     {
-        const string _homePageUrl = "http://localhost/";
-        public SmokeTest()
+        string _homePageUrl = "http://localhost:26641/";
+        [TestInitialize]
+        public void SmokeTestInitialize()
         {
+            var envVar = Environment.GetEnvironmentVariable("MVCHomePageUrl");
+            if (!string.IsNullOrEmpty(envVar))
+            {
+                _homePageUrl = envVar;
+            }
         }
 
         [TestMethod]
