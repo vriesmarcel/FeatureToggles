@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "value": "AppTest02"
+        },
+        "hostingPlanName": {
+            "value": "ServicePlaneb62883c-98e1"
+        },
+        "hostingEnvironment": {
+            "value": ""
+        },
+        "location": {
+            "value": "Central US"
+        },
+        "serverFarmResourceGroup": {
+            "value": "pluralsight"
+        },
+        "subscriptionId": {
+            "value": "e57087a4-a053-48c9-8857-995316398cdc"
+        }
+    }
+}
