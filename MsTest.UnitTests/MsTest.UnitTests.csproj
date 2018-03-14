@@ -110,10 +110,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MvcMusicStore.Data\MvcMusicStore.Data.csproj">
-      <Project>{c520fdcf-168a-48bf-9e06-1eee2e62d78b}</Project>
-      <Name>MvcMusicStore.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MvcMusicStore\MvcMusicStore.csproj">
       <Project>{32dcd27d-a84c-4250-b657-408b3620a9ac}</Project>
       <Name>MvcMusicStore</Name>

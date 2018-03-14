@@ -1,7 +1,4 @@
-﻿using Microsoft.ApplicationInsights;
-using Microsoft.ApplicationInsights.Extensibility;
-using Microsoft.Extensions.Configuration.EnvironmentVariables;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -33,24 +30,21 @@ namespace MvcMusicStore
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
 
-
-            
         }
-
-
 
         protected void Application_Start()
         {
+            
 
-       //System.Environment.SetEnvironmentVariable("connectionStrings__MusicStoreEntities", "Data Source=|DataDirectory|MvcMusicStoreEnv.sdf");
+          //  System.Environment.SetEnvironmentVariable("MusicStoreEntities", "Data Source=|DataDirectory|MvcMusicStoreEnv.sdf");
      
             System.Data.Entity.Database.SetInitializer(new MvcMusicStore.Models.SampleData());
          
-             AreaRegistration.RegisterAllAreas();
+
+            AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
-            
 
         }
     }

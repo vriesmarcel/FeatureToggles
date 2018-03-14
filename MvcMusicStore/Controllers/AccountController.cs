@@ -9,15 +9,15 @@ using Mvc3ToolsUpdateWeb_Default.Models;
 using MvcMusicStore.Models;
 using System.Diagnostics;
 
-namespace MvcMusicStore.Controllers
+namespace Mvc3ToolsUpdateWeb_Default.Controllers
 {
-    public class AccountController : BaseController
+    public class AccountController : Controller
     {
 
         private void MigrateShoppingCart(string UserName)
         {
             // Associate shopping cart items with logged-in user
-            var cart = GetCart(HttpContext);
+            var cart = ShoppingCart.GetCart(this.HttpContext);
 
             cart.MigrateCart(UserName);
             Session[ShoppingCart.CartSessionKey] = UserName;
@@ -164,8 +164,6 @@ namespace MvcMusicStore.Controllers
         {
             return View();
         }
-
-       
 
         #region Status Codes
         private static string ErrorCodeToString(MembershipCreateStatus createStatus)

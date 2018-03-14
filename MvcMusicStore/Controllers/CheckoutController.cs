@@ -6,7 +6,7 @@ using MvcMusicStore.Models;
 namespace MvcMusicStore.Controllers
 {
     [Authorize]
-    public class CheckoutController : BaseController
+    public class CheckoutController : Controller
     {
         MusicStoreEntities storeDB = new MusicStoreEntities();
         const string PromoCode = "FREE";
@@ -45,7 +45,7 @@ namespace MvcMusicStore.Controllers
                     storeDB.SaveChanges();
 
                     //Process the order
-                    var cart = GetCart(this.HttpContext);
+                    var cart = ShoppingCart.GetCart(this.HttpContext);
                     cart.CreateOrder(order);
 
                     return RedirectToAction("Complete",
