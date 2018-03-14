@@ -70,7 +70,7 @@ namespace MvcMusicStore.Controllers
         {
             // do a bussy wait to simulate some heavy serverside stuff
             // to come up with a number.
-            for (int x = 0; x < 1000000000; x++) ;
+            for (long x = 0; x < 5000000000; x++) ;
 
         }
 
