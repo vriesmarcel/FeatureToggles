@@ -80,7 +80,6 @@ For this you add the following tasks to the environment:
   You configure the task so it searches for dll's that have the name codedUI and selenium in it, and you remove any dlls with the name adapter in it.
 
   For this to work, we do need the test assemblies also as part of our build. Extend the build so you create an extra folder in the artifacts directory and there you copy the test dlls that a re part of the solution.
-
   Also make sure you check that the phase of the task is running on an agent that has the capability to run an interactive session. Also check the checkbox "Test mix contains UI Tests". This ensures the demand for an interactive agent is set when queueing the release.
 
 The final task should look as follows:
@@ -128,7 +127,7 @@ Once we have moved all traffic to production again, we can clean up our deployme
 
 The final delivery pipeline should look as follows:
 
-![](finalpipeline.png)
+![](FinalPipeline.png)
 
 # Exercise 3: Add Feature toggles
 In this exercise we add the use of feature toggles to our canary release scenario. the idea is that after we move the traffic to the staging slot, we now want to enable a new feature. The sample application has the ability to enable a feature with a call to a webapi that is part of the website. This API can be called as part of the release pipeline. This way we can release a feature after we validated the new deployment works as it did in the past. 
