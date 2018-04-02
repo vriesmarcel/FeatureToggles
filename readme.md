@@ -4,7 +4,7 @@ Create a new Team Project in a VSTS subscription. Give it any name you like and 
 Clone the repository that can be found here:
 * https://github.com/vriesmarcel/FeatureToggles.git
 
-Now push the cloned repository to your just created VSTS project. this can simply be done by adding an additional remote tot he Git Repo
+Now push the cloned repository to your just created VSTS project. This can simply be done by adding an additional remote to the Git Repo
 
 ``` 
 git remote add vsts https://<yourvstsinstance>.visualstudio.com/<yourproject>/_git/<reponame>
@@ -14,7 +14,7 @@ git push -u vsts --all
  Validate that all the code can be viewed in your VSTS account.
 
 ## Ensure everyone uses a different database
-For this exercise we prepared multiple databases. Coordinate with your meetuphost that everyone gets a unique database to conenct to. ALter the database connection string in the web.config file to point to that unique database.
+For this exercise we prepared multiple databases. Coordinate with your meetuphost that everyone gets a unique database to connect to. ALter the database connection string in the web.config file to point to that unique database.
 
 All databases have the same name, with an additional number. User name and password are the same for all databases.
 The name of the database is: **MeetupMusicStoreXXX** where XXX is the sequence number.
@@ -25,7 +25,7 @@ The name of the database is: **MeetupMusicStoreXXX** where XXX is the sequence n
 # Exercise 1: Creating a build
 Before we can release the software, we need to build it first. For this we create a new CI build using the Standard VSTS visual Studio 2017 hosted Agent pool
 
-Got the build tab and create a new build
+Go to the build tab and create a new build
 Pick the template for ASP.NET web applications
 
 Point to the git repo you just populated with the MVC Music Store sample that is provided.
@@ -69,7 +69,7 @@ The following tasks are used:
     az webapp traffic-routing set -d staging=0 --resource-group <yourresourcegroup> --name <yourappname>
     ```
 
-* Azure Appservice Deploy (install the web application to staging). Use the zipfile that is created in the build andensure you deploy to the slot with the name "staging"
+* Azure Appservice Deploy (install the web application to staging). Use the zipfile that is created in the build and ensure you deploy to the slot with the name "staging"
 
 ## Add the second Environment "Smoke test"
 In this environment you are going to run a set of UI integration tests to validate if the staging slot is servicing the web application and if the website can show the happy path of your application, buying one product.
@@ -79,7 +79,7 @@ For this you add the following tasks to the environment:
   * 
   You configure the task so it searches for dll's that have the name codedUI and selenium in it, and you remove any dlls with the name adapter in it.
 
-  For this to work, we do need the test assemblies also as part of our build. Extend the build so you create an extra folder in the artifacts directory and there you copy the test dlls that a re part of the solution.
+  For this to work, we do need the test assemblies also as part of our build. Extend the build so you create an extra folder in the artifacts directory and there you copy the test dlls that are part of the solution.
   Also make sure you check that the phase of the task is running on an agent that has the capability to run an interactive session. Also check the checkbox "Test mix contains UI Tests". This ensures the demand for an interactive agent is set when queueing the release.
 
 The final task should look as follows:
