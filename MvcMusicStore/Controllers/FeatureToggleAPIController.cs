@@ -45,7 +45,7 @@ namespace MvcMusicStore.Controllers
         }
 
         // PUT api/<controller>/5
-        public async void Put(Guid id, [FromBody]bool value)
+        public async void Put(Guid id, [FromUri]bool value)
         {
             if (Guid.Empty.Equals(id))
             {
