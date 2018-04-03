@@ -1,5 +1,11 @@
+# Prerequisites
+
+To complete the exercises you need to have 
+* Your own Visual Studio Team Services Account
+* Your own Azure Subscription
+
 # Exercise 0: Getting started
-Create a new Team Project in a VSTS subscription. Give it any name you like and create a Git repository that can contain the code we will use in our Exercises.
+Create a new Team Project in your VSTS subscription. Give it any name you like and create a Git repository that can contain the code we will use in our Exercises.
 
 Clone the repository that can be found here:
 * https://github.com/vriesmarcel/FeatureToggles.git
@@ -11,10 +17,12 @@ git remote add vsts https://<yourvstsinstance>.visualstudio.com/<yourproject>/_g
 git push -u vsts --all
 ```
 
- Validate that all the code can be viewed in your VSTS account.
+Validate that all the code can be viewed in your VSTS account.
 
-## Ensure everyone uses a different database
-For this exercise we prepared multiple databases. Coordinate with your meetuphost that everyone gets a unique database to connect to. ALter the database connection string in the web.config file to point to that unique database.
+## Ensure everyone uses a different database - Alter the Web.config
+For this exercise we prepared multiple databases. Coordinate with your meetup host that everyone gets a unique database to connect to. 
+
+**Alter the database connection string in the web.config file to point to that unique database.**
 
 All databases have the same name, with an additional number. User name and password are the same for all databases.
 The name of the database is: **MeetupMusicStoreXXX** where XXX is the sequence number.
@@ -25,14 +33,14 @@ The name of the database is: **MeetupMusicStoreXXX** where XXX is the sequence n
 # Exercise 1: Creating a build
 Before we can release the software, we need to build it first. For this we create a new CI build using the Standard VSTS visual Studio 2017 hosted Agent pool
 
-Go to the build tab and create a new build
-Pick the template for ASP.NET web applications
+* Go to the build tab and create a new build
+* Pick the template for ASP.NET web applications
 
-Point to the git repo you just populated with the MVC Music Store sample that is provided.
+* Point to the git repo you just populated with the MVC Music Store sample that is provided.
 
-Add an extra step to the build to also include any files that can be found in the source control folder called provisioning. We will add files to this folder later to provision our azure resources to run the application.
+* Add an extra step to the build definition to also include any files that can be found in the source control folder called **provisioning**. We will add files to this folder later to provision our Azure resources to run the application.
 
-Run the build and see if it runs successfully and that you find in the artifact store the zip files that are required to do a web deployment (mvcmusicstore.zip file)
+* Run the build and see if it runs successfully and that you find in the artifact store the zip files that are required to do a web deployment (mvcmusicstore.zip file)
 
 # Exercise 2: Creating a Release pipeline for a canary release
 We create a basic release pipeline first that can deploy our application to an Azure webapp.
@@ -76,7 +84,7 @@ In this environment you are going to run a set of UI integration tests to valida
 
 For this you add the following tasks to the environment:
 * Visual Studio Test
-  * 
+   
   You configure the task so it searches for dll's that have the name codedUI and selenium in it, and you remove any dlls with the name adapter in it.
 
   For this to work, we do need the test assemblies also as part of our build. Extend the build so you create an extra folder in the artifacts directory and there you copy the test dlls that are part of the solution.
@@ -133,15 +141,19 @@ The final delivery pipeline should look as follows:
 In this exercise we add the use of feature toggles to our canary release scenario. the idea is that after we move the traffic to the staging slot, we now want to enable a new feature. The sample application has the ability to enable a feature with a call to a webapi that is part of the website. This API can be called as part of the release pipeline. This way we can release a feature after we validated the new deployment works as it did in the past. 
 
 ## Add an Environment "Enable Feature"
-Add an extra environment after the 10%. Here we call the webapi to enable the feature HomePagefeatureToggle and we set it to true.
+Add an extra environment after the 10%. Here we call the WebAPI to enable the feature HomePagefeatureToggle and we set it to true.
 
-the HomePagefeatureToggle has the following properties:
-id=a5144d6f-3e07-47d9-a3b9-6b630ef1a4b5
-name = HomePagefeatureToggle 
+The HomePagefeatureToggle has the following properties:
+
+|||
+|---|---|
+|id | a5144d6f-3e07-47d9-a3b9-6b630ef1a4b5|
+|name|HomePagefeatureToggle|
+
 On the homepage of the website you can see the value of the feature toggle:
 
-To enable the feature we use use the task powershell and use the following inline script:
+To enable the feature we use use the task *PowerShell* and use the following inline script:
 
-``` 
+```powershell
 Invoke-WebRequest -Method Put -Uri  http://localhost:26641/api/featuretoggleAPI/a5144d6f-3e07-47d9-a3b9-6b630ef1a4b5?value=false
 ```
